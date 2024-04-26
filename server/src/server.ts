@@ -1,12 +1,17 @@
-import express, {Request, Response} from "express";
+import express, { Request, Response } from "express";
+import { sequelize } from "./connection";
 
 const app = express();
 const port = 3000;
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Hello World");
-})
+  res.send("Hello World");
+});
 
-app.listen(port, () => {
- console.log(`Listening at http://localhost:${port}`);
-})
+(async () => {
+  await sequelize.sync({ force: true });
+  console.log("Model synchronized successfully");
+  app.listen(port, () => {
+    console.log(`Listening at http://localhost:${port}`);
+  });
+})();
