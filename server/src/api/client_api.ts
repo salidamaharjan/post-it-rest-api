@@ -18,6 +18,7 @@ router.get("/clients", async (req: Request, res: Response) => {
 router.get("/clients/:id", async (req: Request, res: Response) => {
   try {
     const clientById = await Client.findOne({
+      attributes: { exclude: ["password"] },
       where: {
         id: req.params.id,
       },
