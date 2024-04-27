@@ -3,10 +3,12 @@ import { sequelize } from "./connection";
 import { postRoute, clientRoute, loginRoute } from "./api/index";
 import { Post, Client } from "./models/index";
 import bcrypt from "bcrypt";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 app.use(express.json());
+app.use(cors());
 app.use("/api", postRoute, clientRoute, loginRoute);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
@@ -18,11 +20,11 @@ app.get("/", (req: Request, res: Response) => {
 
   await Client.create({
     username: "user1",
-    password: await bcrypt.hash("password", 15)
+    password: await bcrypt.hash("password", 15),
   });
   await Client.create({
     username: "user2",
-    password: await bcrypt.hash("password", 15)
+    password: await bcrypt.hash("password", 15),
   });
   await Post.create({
     title: "Hello all from user 1",
