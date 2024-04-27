@@ -6,7 +6,9 @@ const router = express.Router();
 
 router.get("/clients", async (req: Request, res: Response) => {
   try {
-    const allUsers = await Client.findAll();
+    const allUsers = await Client.findAll({
+      attributes: { exclude: ["password"] },
+    });
     res.status(200).json(allUsers);
   } catch (err) {
     res.status(500).json({ message: err });
