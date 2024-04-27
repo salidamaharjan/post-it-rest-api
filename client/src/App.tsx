@@ -22,7 +22,7 @@ type Post = {
 function App() {
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   useEffect(() => {
-    // fetchData();
+    fetchData();
   }, []);
   async function fetchData() {
     try {
@@ -33,15 +33,10 @@ function App() {
       console.log(err);
     }
   }
-  function handleOnClick() {
-    fetchData();
-  }
+
   return (
     <div className="flex flex-col p-4 gap-2">
-      <div className="text-green-600 text-lg font-bold">Posts</div>
-      <Button className="w-[100px]" onClick={handleOnClick}>
-        Get All Posts
-      </Button>
+      <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
           return (
