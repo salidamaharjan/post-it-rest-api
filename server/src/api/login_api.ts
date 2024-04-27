@@ -23,7 +23,9 @@ router.post("/login", async (req: Request, res: Response) => {
     const checkPasswordValid = await bcrypt.compare(password, user!.password);
     // console.log(passwordValid);
     if (!checkPasswordValid) {
-      res.status(400).json({message: "Incorrect username and password combination"});
+      res
+        .status(400)
+        .json({ message: "Incorrect username and password combination" });
       return;
     }
 

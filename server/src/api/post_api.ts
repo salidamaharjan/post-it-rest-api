@@ -1,6 +1,7 @@
 import express, { Response, Request } from "express";
 const router = express.Router();
 import Post from "../models/Post";
+import authMiddleware from "../auth";
 
 router.get("/posts", async (req: Request, res: Response) => {
   try {
@@ -27,11 +28,14 @@ router.get("/posts/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.post("/posts", async (req: Request, res: Response) => {
+router.post("/posts", authMiddleware, async (req: Request, res: Response) => {
+  const loggedInUser = (req as any).user;
+  const authorizedId = loggedInUser.id;
   try {
     await Post.create({
       title: req.body.title,
       content: req.body.content,
+      clientId: authorizedId,
     });
     res.status(200).json({ message: "New post added!" });
   } catch (err) {
