@@ -1,6 +1,14 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Button } from "./components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 type Post = {
   id: number;
@@ -34,16 +42,23 @@ function App() {
       <Button className="w-[100px]" onClick={handleOnClick}>
         Get All Posts
       </Button>
-      <div>
+      <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
           return (
-            <div key={post.id}>
-              <div>{post.id}</div>
-              <div>{post.title}</div>
-              <div>{post.content}</div>
-              <div>{post.createdAt}</div>
-              <div>{post.updatedAt}</div>
-            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>{post.title}</CardTitle>
+                <CardDescription>By id {post.clientId}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-green-700 text-lg font-bold">Content</div>
+                <p>{post.content}</p>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <p>Created at {post.createdAt}</p>
+                <p>Updated at {post.updatedAt}</p>
+              </CardFooter>
+            </Card>
           );
         })}
       </div>

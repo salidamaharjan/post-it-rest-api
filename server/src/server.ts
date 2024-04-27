@@ -28,17 +28,17 @@ app.get("/", (req: Request, res: Response) => {
   });
   await Post.create({
     title: "Hello all from user 1",
-    content: "",
+    content: "fkakgkajgkjakgjakeg",
     clientId: 1,
   });
   await Post.create({
     title: "Hello2 from user 1",
-    content: "",
+    content: "dfjgajgjakgkjahgkjaegkeebnjkfdn",
     clientId: 1,
   });
   await Post.create({
     title: "Hello from user 2",
-    content: "",
+    content: "fgjoagkldfgl;kadfgdogadogjaogjegjveijv;vj",
     clientId: 2,
   });
   app.listen(port, () => {
