@@ -1,7 +1,17 @@
-import { DataTypes, Model } from "sequelize";
+import {
+  DataTypes,
+  Model,
+  InferAttributes,
+  InferCreationAttributes,
+} from "sequelize";
 import { sequelize } from "../connection";
 
-class Post extends Model {}
+class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
+  declare id: number | null;
+  declare title: string;
+  declare content: string;
+  declare clientId: number;
+}
 
 Post.init(
   {
