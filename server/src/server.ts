@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
 import { sequelize } from "./connection";
-import {postRoute, clientRoute} from "./api/index";
+import { postRoute, clientRoute, loginRoute } from "./api/index";
 import { Post, Client } from "./models/index";
-import { authorizedUser } from "./auth";
+import bcrypt from "bcrypt";
 
 const app = express();
 const port = 3000;
 app.use(express.json());
-app.use("/api", postRoute, clientRoute);
+app.use("/api", postRoute, clientRoute, loginRoute);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });
@@ -15,13 +15,15 @@ app.get("/", (req: Request, res: Response) => {
 (async () => {
   await sequelize.sync({ force: true });
   console.log("Model synchronized successfully");
+
+  await Client.create({
+    username: "user1",
+    password: await bcrypt.hash("password", 15)
+  });
   await Post.create({
     title: "Hello all",
     content: "",
-  });
-  await Client.create({
-    username: "user1",
-    password: "password",
+    clientId: 1,
   });
   app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);

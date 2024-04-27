@@ -35,6 +35,11 @@ Client.init(
   {
     sequelize,
     modelName: "client",
+    defaultScope: {
+      attributes: {
+        exclude: ["password"],
+      },
+    },
     underscored: true,
     timestamps: true,
     freezeTableName: true,
