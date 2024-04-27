@@ -77,12 +77,27 @@ router.put(
   }
 );
 
-router.delete("/posts/:id", async (req: Request, res: Response) => {
-  try {
-    Post.destroy({ where: { id: req.params.id } });
-    res.status(200).json({ message: "Post Deleted" });
-  } catch (err) {
-    res.status(500).json({ message: err });
+router.delete(
+  "/posts/:id",
+  authMiddleware,
+  async (req: Request, res: Response) => {
+    try {
+      const loggedInUser = (req as any).user;
+      const authorizedId = loggedInUser.id;
+      const clientPost = await Post.findOne({ where: { id: req.params.id } });
+      const idOfClientPost = clientPost?.clientId;
+      // console.log("clientPost", clientPost);
+      // console.log("idOfClientPost", idOfClientPost);
+      if (authorizedId !== idOfClientPost) {
+        console.log("inside if", authorizedId, idOfClientPost);
+        res.status(400).json({ message: "User not authorized" });
+        return;
+      }
+      Post.destroy({ where: { id: req.params.id } });
+      res.status(200).json({ message: "Post Deleted" });
+    } catch (err) {
+      res.status(500).json({ message: err });
+    }
   }
-});
+);
 export default router;
