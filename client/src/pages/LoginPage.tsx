@@ -9,6 +9,8 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   function handleOnClick() {
     alert(`username: ${username} password: ${password}`);
+    setUsername("");
+    setPassword("");
   }
   return (
     <div className="flex justify-center mt-6">
@@ -20,6 +22,7 @@ function LoginPage() {
             <Input
               placeholder="Username"
               type="text"
+              value={username}
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
@@ -30,6 +33,7 @@ function LoginPage() {
             <Input
               placeholder="Password"
               type="password"
+              value={password}
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
