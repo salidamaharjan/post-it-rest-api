@@ -19,6 +19,7 @@ function LoginPage() {
             <Label htmlFor="username">Username</Label>
             <Input
               placeholder="Username"
+              type="text"
               onChange={(e) => {
                 setUsername(e.target.value);
               }}
@@ -28,6 +29,7 @@ function LoginPage() {
             <Label htmlFor="password">Password</Label>
             <Input
               placeholder="Password"
+              type="password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
