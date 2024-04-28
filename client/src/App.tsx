@@ -1,14 +1,22 @@
 import "./App.css";
 import { Outlet } from "react-router-dom";
-
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "react-router-dom";
 function App() {
   return (
     <div>
-      <nav>
-        <div>Posts</div>
-        <div>Login</div>
-      </nav>
-      <Outlet />
+      <Tabs defaultValue="account">
+        <TabsList>
+          <TabsTrigger value="posts">
+            <Link to="/">Posts</Link>
+          </TabsTrigger>
+          <TabsTrigger value="login">
+            <Link to="/login">Login</Link>
+          </TabsTrigger>
+          <TabsTrigger value="logout">Logout</TabsTrigger>
+        </TabsList>
+        <Outlet />
+      </Tabs>
     </div>
   );
 }
