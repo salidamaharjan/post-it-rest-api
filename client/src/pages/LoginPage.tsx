@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 function LoginPage() {
   return (
@@ -16,6 +17,7 @@ function LoginPage() {
             <Label htmlFor="password">Password</Label>
             <Input placeholder="Password" />
           </div>
+          <Button className="bg-green-500 text-lg font-bold">Login</Button>
         </CardContent>
       </Card>
     </div>
