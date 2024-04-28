@@ -4,8 +4,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 function App() {
   return (
-    <div>
+    <div >
       <Tabs defaultValue="account">
+        <div className="flex flex-col">
         <TabsList>
           <TabsTrigger value="posts">
             <Link to="/">Posts</Link>
@@ -15,6 +16,7 @@ function App() {
           </TabsTrigger>
           <TabsTrigger value="logout">Logout</TabsTrigger>
         </TabsList>
+        </div>
         <Outlet />
       </Tabs>
     </div>
