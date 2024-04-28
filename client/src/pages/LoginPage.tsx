@@ -7,6 +7,7 @@ import { useState } from "react";
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
     const response = await fetch(`http://localhost:3000/api/login`, {
@@ -20,7 +21,10 @@ function LoginPage() {
       }),
     });
     const data = await response.json();
-    console.log("data", data);
+    // console.log("data", data);
+    const token = data.accessToken;
+    localStorage.setItem("token", token); 
+    
     setUsername("");
     setPassword("");
   }
