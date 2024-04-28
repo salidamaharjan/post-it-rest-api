@@ -4,16 +4,21 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import {post} from "../lib/http";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
     const data = await post("http://localhost:3000/api/login", {username, password})
     const token = data.accessToken;
-    localStorage.setItem("token", token); 
+    if(token) {
+      localStorage.setItem("token", token);
+      navigate("/")
+    }
     setUsername("");
     setPassword("");
   }

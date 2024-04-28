@@ -37,7 +37,7 @@ function PostPage() {
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
           return (
-            <Card>
+            <Card key={post.id}>
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>By id {post.clientId}</CardDescription>
