@@ -7,8 +7,20 @@ import { useState } from "react";
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  function handleOnClick() {
-    alert(`username: ${username} password: ${password}`);
+  async function handleOnClick() {
+    // alert(`username: ${username} password: ${password}`);
+    const response = await fetch(`http://localhost:3000/api/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+    const data = await response.json();
+    console.log("data", data);
     setUsername("");
     setPassword("");
   }
