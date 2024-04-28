@@ -3,7 +3,7 @@ const router = express.Router();
 import Post from "../models/Post";
 import authMiddleware from "../auth";
 
-router.get("/posts", async (req: Request, res: Response) => {
+router.get("/posts", authMiddleware, async (req: Request, res: Response) => {
   try {
     const posts = await Post.findAll();
     // console.log(posts);
@@ -14,19 +14,23 @@ router.get("/posts", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/posts/:id", async (req: Request, res: Response) => {
-  try {
-    const postById = await Post.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(postById);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: err });
+router.get(
+  "/posts/:id",
+  authMiddleware,
+  async (req: Request, res: Response) => {
+    try {
+      const postById = await Post.findOne({
+        where: {
+          id: req.params.id,
+        },
+      });
+      res.status(200).json(postById);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: err });
+    }
   }
-});
+);
 
 router.post("/posts", authMiddleware, async (req: Request, res: Response) => {
   const loggedInUser = (req as any).user;

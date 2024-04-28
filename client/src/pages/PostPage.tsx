@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { get } from "../lib/http";
 
 import {
   Card,
@@ -24,17 +25,14 @@ function PostPage() {
   }, []);
   async function fetchData() {
     try {
-      const response = await fetch("http://localhost:3000/api/posts");
-      const result = await response.json();
+      const result = await get("http://localhost:3000/api/posts");
       setAllPosts(result);
     } catch (err) {
       console.log(err);
     }
   }
-
   return (
     <div className="flex flex-col p-4 gap-2">
-     
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {

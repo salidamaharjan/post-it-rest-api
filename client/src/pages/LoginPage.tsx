@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import {post} from "../lib/http";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -10,21 +11,9 @@ function LoginPage() {
 
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
-    const response = await fetch(`http://localhost:3000/api/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-    const data = await response.json();
-    // console.log("data", data);
+    const data = await post("http://localhost:3000/api/login", {username, password})
     const token = data.accessToken;
     localStorage.setItem("token", token); 
-    
     setUsername("");
     setPassword("");
   }
