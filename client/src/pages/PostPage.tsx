@@ -24,6 +24,8 @@ type Post = {
   updatedAt: string;
 };
 function PostPage() {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   useEffect(() => {
     fetchData();
@@ -37,7 +39,7 @@ function PostPage() {
     }
   }
   function handleAddOnclick() {
-    alert("you clicked add");
+    alert(`tile: ${title}`);
   }
   return (
     <div className="flex flex-col p-4 gap-2">
@@ -48,7 +50,12 @@ function PostPage() {
           <Label htmlFor="title" className="text-green-700 text-lg font-bold">
             Title
           </Label>
-          <Input placeholder="Title"></Input>
+          <Input
+            placeholder="Title"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          ></Input>
           <Label htmlFor="content" className="text-green-700 text-lg font-bold">
             Content
           </Label>
