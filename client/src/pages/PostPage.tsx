@@ -14,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-label";
 import { Textarea } from "@/components/ui/textarea";
 import { SignedIn } from "@/components/ui/SignedIn";
-import { SignedOut } from "@/components/ui/SignedOut";
 
 type Post = {
   id: number;
@@ -37,6 +36,9 @@ function PostPage() {
       console.log(err);
     }
   }
+  function handleAddOnclick() {
+    alert("you clicked add");
+  }
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
@@ -51,7 +53,9 @@ function PostPage() {
             Content
           </Label>
           <Textarea placeholder="Content"></Textarea>
-          <Button className="bg-green-600 w-[100px]">Add</Button>
+          <Button className="bg-green-600 w-[100px]" onClick={handleAddOnclick}>
+            Add
+          </Button>
         </Card>
       </SignedIn>
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
