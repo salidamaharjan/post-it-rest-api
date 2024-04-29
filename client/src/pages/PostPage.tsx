@@ -39,7 +39,7 @@ function PostPage() {
     }
   }
   function handleAddOnclick() {
-    alert(`tile: ${title}`);
+    alert(`tile: ${title} content: ${content}`);
   }
   return (
     <div className="flex flex-col p-4 gap-2">
@@ -59,7 +59,12 @@ function PostPage() {
           <Label htmlFor="content" className="text-green-700 text-lg font-bold">
             Content
           </Label>
-          <Textarea placeholder="Content"></Textarea>
+          <Textarea
+            placeholder="Content"
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          ></Textarea>
           <Button className="bg-green-600 w-[100px]" onClick={handleAddOnclick}>
             Add
           </Button>
