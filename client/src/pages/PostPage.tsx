@@ -60,8 +60,9 @@ function PostPage() {
     await addPost();
     await fetchData();
     toast({
+      variant: "success",
       description: "Your Post Added!",
-    })
+    });
     setContent("");
     setTitle("");
   }
