@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { get } from "../lib/http";
+import { post } from "../lib/http";
 
 import {
   Card,
@@ -27,9 +28,11 @@ function PostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
+
   useEffect(() => {
     fetchData();
   }, []);
+
   async function fetchData() {
     try {
       const result = await get("http://localhost:3000/api/posts");
@@ -38,9 +41,23 @@ function PostPage() {
       console.log(err);
     }
   }
+  async function addPost() {
+    try {
+      const result = await post("http://localhost:3000/api/posts", {
+        title,
+        content,
+      });
+      console.log("result", result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   function handleAddOnclick() {
+    addPost();
     alert(`tile: ${title} content: ${content}`);
   }
+
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
@@ -70,6 +87,7 @@ function PostPage() {
           </Button>
         </Card>
       </SignedIn>
+
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
