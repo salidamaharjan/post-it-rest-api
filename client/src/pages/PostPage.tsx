@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-label";
@@ -32,6 +33,8 @@ function PostPage() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const { toast } = useToast();
 
   async function fetchData() {
     try {
@@ -56,6 +59,9 @@ function PostPage() {
   async function handleAddOnclick() {
     await addPost();
     await fetchData();
+    toast({
+      description: "Your Post Added!",
+    })
     setContent("");
     setTitle("");
   }
@@ -86,6 +92,7 @@ function PostPage() {
               setContent(e.target.value);
             }}
           ></Textarea>
+
           <Button className="bg-green-600 w-[100px]" onClick={handleAddOnclick}>
             Add
           </Button>
