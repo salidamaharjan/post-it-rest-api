@@ -53,9 +53,9 @@ function PostPage() {
     }
   }
 
-  function handleAddOnclick() {
-    addPost();
-    alert(`tile: ${title} content: ${content}`);
+  async function handleAddOnclick() {
+    await addPost();
+    await fetchData();
   }
 
   return (
