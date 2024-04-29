@@ -12,8 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@radix-ui/react-label";
-import { Textarea } from "@/components/ui/textarea"
-
+import { Textarea } from "@/components/ui/textarea";
+import { SignedIn } from "@/components/ui/SignedIn";
+import { SignedOut } from "@/components/ui/SignedOut";
 
 type Post = {
   id: number;
@@ -38,16 +39,21 @@ function PostPage() {
   }
   return (
     <div className="flex flex-col p-4 gap-2">
-      <div>
+      <SignedIn>
+        {" "}
         <Card className="flex flex-col p-4 gap-2">
           <CardTitle>Add a Post</CardTitle>
-          <Label htmlFor="title" className="text-green-700 text-lg font-bold">Title</Label>
+          <Label htmlFor="title" className="text-green-700 text-lg font-bold">
+            Title
+          </Label>
           <Input placeholder="Title"></Input>
-          <Label htmlFor="content" className="text-green-700 text-lg font-bold">Content</Label>
+          <Label htmlFor="content" className="text-green-700 text-lg font-bold">
+            Content
+          </Label>
           <Textarea placeholder="Content"></Textarea>
           <Button className="bg-green-600 w-[100px]">Add</Button>
         </Card>
-      </div>
+      </SignedIn>
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
