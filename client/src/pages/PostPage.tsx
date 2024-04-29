@@ -56,6 +56,8 @@ function PostPage() {
   async function handleAddOnclick() {
     await addPost();
     await fetchData();
+    setContent("");
+    setTitle("");
   }
 
   return (
@@ -69,6 +71,7 @@ function PostPage() {
           </Label>
           <Input
             placeholder="Title"
+            value={title}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
@@ -78,6 +81,7 @@ function PostPage() {
           </Label>
           <Textarea
             placeholder="Content"
+            value={content}
             onChange={(e) => {
               setContent(e.target.value);
             }}
