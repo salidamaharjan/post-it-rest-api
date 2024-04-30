@@ -65,6 +65,9 @@ function PostPage() {
     setTitle("");
   }
 
+  function handleLikeClicked(){
+ alert("you clicked like")
+  }
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
@@ -89,7 +92,7 @@ function PostPage() {
                 <p>Created at {post.createdAt}</p>
                 <p>Updated at {post.updatedAt}</p>
               </CardFooter>
-              <Button variant={"ghost"}>👍</Button>
+              <Button variant={"ghost"} onClick={handleLikeClicked}>👍</Button>
             </Card>
           );
         })}
