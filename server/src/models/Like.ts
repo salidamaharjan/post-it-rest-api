@@ -6,46 +6,43 @@ import {
 } from "sequelize";
 import { sequelize } from "../connection";
 
-class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
+class Like extends Model<InferAttributes<Like>, InferCreationAttributes<Like>> {
   declare id: number | null;
-  declare title: string;
-  declare content: string;
   declare clientId: number;
+  declare postId: number;
 }
 
-Post.init(
+Like.init(
   {
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
+      autoIncrement:true,
       primaryKey: true,
-    },
-    title: {
-      type: DataTypes.STRING(256),
       allowNull: false,
     },
-    content: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-    },
-
     clientId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       references: {
         model: "client",
+        key: "id",
+      },
+    },
+    postId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: "post",
         key: "id",
       },
     },
   },
   {
     sequelize,
-    modelName: "post",
+    modelName: "like",
     underscored: true,
     timestamps: true,
     freezeTableName: true,
   }
 );
-
-export default Post;
+export default Like;

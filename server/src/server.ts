@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { sequelize } from "./connection";
 import { postRoute, clientRoute, loginRoute } from "./api/index";
-import { Post, Client } from "./models/index";
+import { Post, Client, Like } from "./models/index";
 import bcrypt from "bcrypt";
 import cors from "cors";
 
@@ -42,6 +42,14 @@ app.get("/", (req: Request, res: Response) => {
     title: "Hello from user 2",
     content: "fgjoagkldfgl;kadfgdogadogjaogjegjveijv;vj",
     clientId: 2,
+  });
+  await Like.create({
+    clientId: 1,
+    postId: 2,
+  });
+  await Like.create({
+    clientId: 2,
+    postId: 1,
   });
   app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
