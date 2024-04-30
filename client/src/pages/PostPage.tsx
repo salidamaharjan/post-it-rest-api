@@ -27,6 +27,7 @@ function PostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [likeCount, setLikeCount] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -65,14 +66,21 @@ function PostPage() {
     setTitle("");
   }
 
-  function handleLikeClicked(){
- alert("you clicked like")
+  function handleLikeClicked() {
+    setLikeCount(likeCount + 1);
   }
+
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
         {" "}
-        <AddPostCard title={title} content={content} setContent={setContent} setTitle={setTitle} onClick={handleAddOnclick}/>
+        <AddPostCard
+          title={title}
+          content={content}
+          setContent={setContent}
+          setTitle={setTitle}
+          onClick={handleAddOnclick}
+        />
       </SignedIn>
 
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>
@@ -88,11 +96,16 @@ function PostPage() {
                 <div className="text-green-700 text-lg font-bold">Content</div>
                 <p>{post.content}</p>
               </CardContent>
-              <CardFooter className="flex justify-between">
+              <CardFooter className="flex justify-between text-center">
                 <p>Created at {post.createdAt}</p>
                 <p>Updated at {post.updatedAt}</p>
               </CardFooter>
-              <Button variant={"ghost"} onClick={handleLikeClicked}>👍</Button>
+              <div className="flex items-center">
+                <Button variant={"ghost"} onClick={handleLikeClicked}>
+                  👍
+                </Button>
+                <div>{likeCount}</div>
+              </div>
             </Card>
           );
         })}
