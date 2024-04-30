@@ -11,11 +11,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@radix-ui/react-label";
-import { Textarea } from "@/components/ui/textarea";
-import { SignedIn } from "@/components/ui/SignedIn";
+import { SignedIn } from "@/components/reactComponent/SignedIn";
+import { AddPostCard } from "@/components/reactComponent/AppPostCard";
 
 type Post = {
   id: number;
@@ -71,33 +68,7 @@ function PostPage() {
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
         {" "}
-        <Card className="flex flex-col p-4 gap-2">
-          <CardTitle>Add a Post</CardTitle>
-          <Label htmlFor="title" className="text-green-700 text-lg font-bold">
-            Title
-          </Label>
-          <Input
-            placeholder="Title"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          ></Input>
-          <Label htmlFor="content" className="text-green-700 text-lg font-bold">
-            Content
-          </Label>
-          <Textarea
-            placeholder="Content"
-            value={content}
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-          ></Textarea>
-
-          <Button className="bg-green-600 w-[100px]" onClick={handleAddOnclick}>
-            Add
-          </Button>
-        </Card>
+        <AddPostCard title={title} content={content} setContent={setContent} setTitle={setTitle} onClick={handleAddOnclick}/>
       </SignedIn>
 
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>

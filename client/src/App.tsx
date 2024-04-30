@@ -4,8 +4,8 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
-import { SignedIn } from "./components/ui/SignedIn";
-import { SignedOut } from "./components/ui/SignedOut";
+import { SignedIn } from "./components/reactComponent/SignedIn";
+import { SignedOut } from "./components/reactComponent/SignedOut";
 import { Toaster } from "./components/ui/toaster";
 
 function App() {
