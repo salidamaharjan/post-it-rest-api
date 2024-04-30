@@ -11,6 +11,7 @@ class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   declare title: string;
   declare content: string;
   declare clientId: number;
+  declare likes: number;
 }
 
 Post.init(
@@ -27,6 +28,10 @@ Post.init(
     },
     content: {
       type: DataTypes.TEXT,
+      allowNull: true,
+    },
+    likes: {
+      type: DataTypes.INTEGER,
       allowNull: true,
     },
     clientId: {

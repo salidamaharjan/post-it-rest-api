@@ -67,7 +67,7 @@ function PostPage() {
   }
 
   function handleLikeClicked() {
-    setLikeCount(likeCount + 1);
+    setLikeCount(likeCount+1);
   }
 
   return (
@@ -104,7 +104,7 @@ function PostPage() {
                 <Button variant={"ghost"} onClick={handleLikeClicked}>
                   👍
                 </Button>
-                <div>{likeCount}</div>
+                <div >{likeCount}</div>
               </div>
             </Card>
           );
