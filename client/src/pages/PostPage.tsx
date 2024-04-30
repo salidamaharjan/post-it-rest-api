@@ -13,6 +13,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { SignedIn } from "@/components/reactComponent/SignedIn";
 import { AddPostCard } from "@/components/reactComponent/AppPostCard";
+import { Button } from "@/components/ui/button";
 
 type Post = {
   id: number;
@@ -88,6 +89,7 @@ function PostPage() {
                 <p>Created at {post.createdAt}</p>
                 <p>Updated at {post.updatedAt}</p>
               </CardFooter>
+              <Button variant={"ghost"}>👍</Button>
             </Card>
           );
         })}
