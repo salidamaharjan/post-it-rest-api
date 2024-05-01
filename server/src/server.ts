@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { sequelize } from "./connection";
-import { postRoute, clientRoute, loginRoute } from "./api/index";
+import { postRoute, clientRoute, loginRoute, likeRoute } from "./api/index";
 import { Post, Client, Like } from "./models/index";
 import bcrypt from "bcrypt";
 import cors from "cors";
@@ -11,7 +11,7 @@ const port = 3000;
 app.use(express.json());
 app.use(cors());
 
-app.use("/api", postRoute, clientRoute, loginRoute);
+app.use("/api", postRoute, clientRoute, loginRoute, likeRoute);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World");
 });

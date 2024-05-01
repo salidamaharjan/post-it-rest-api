@@ -67,8 +67,6 @@ function PostPage() {
     setTitle("");
   }
 
-  
-
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
@@ -102,7 +100,6 @@ function PostPage() {
                 <Button
                   variant={"ghost"}
                   onClick={() => {
-                    // alert(`${post.likeCount}`);
                     setLikeCount(post.likeCount++);
                   }}
                 >
