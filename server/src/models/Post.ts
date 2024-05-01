@@ -29,7 +29,6 @@ Post.init(
       type: DataTypes.TEXT,
       allowNull: true,
     },
-
     clientId: {
       type: DataTypes.INTEGER,
       allowNull: false,

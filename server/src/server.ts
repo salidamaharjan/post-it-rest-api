@@ -51,6 +51,10 @@ app.get("/", (req: Request, res: Response) => {
     clientId: 2,
     postId: 1,
   });
+  await Like.create({
+    clientId: 1,
+    postId: 1,
+  });
   app.listen(port, () => {
     console.log(`Listening at http://localhost:${port}`);
   });

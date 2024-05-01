@@ -2,10 +2,23 @@ import express, { Response, Request } from "express";
 const router = express.Router();
 import Post from "../models/Post";
 import authMiddleware from "../auth";
+import { Like } from "../models";
+import { sequelize } from "../connection";
 
 router.get("/posts", async (req: Request, res: Response) => {
   try {
-    const posts = await Post.findAll();
+    const posts = await Post.findAll({
+      attributes: [
+        "id",
+        "title",
+        "content",
+        "createdAt",
+        "updatedAt",
+        [sequelize.fn("COUNT", sequelize.col("likes")), "likeCount"],
+      ],
+      include: { model: Like, attributes: [] },
+      group: ["post.id", "post.title", "post.content"],
+    });
     // console.log(posts);
     res.status(200).json(posts);
   } catch (err) {
