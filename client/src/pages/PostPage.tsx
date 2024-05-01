@@ -22,6 +22,7 @@ type Post = {
   clientId: number;
   createdAt: string;
   updatedAt: string;
+  likeCount: number;
 };
 function PostPage() {
   const [title, setTitle] = useState("");
@@ -104,7 +105,7 @@ function PostPage() {
                 <Button variant={"ghost"} onClick={handleLikeClicked}>
                   👍
                 </Button>
-                <div >{likeCount}</div>
+                <div >{post.likeCount}</div>
               </div>
             </Card>
           );
