@@ -28,7 +28,7 @@ function PostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
-  const [likeCount, setLikeCount] = useState(0);
+  const [likeCount, setLikeCount] = useState(1);
 
   useEffect(() => {
     fetchData();
@@ -67,14 +67,11 @@ function PostPage() {
     setTitle("");
   }
 
-  function handleLikeClicked() {
-    setLikeCount(likeCount+1);
-  }
+  
 
   return (
     <div className="flex flex-col p-4 gap-2">
       <SignedIn>
-        {" "}
         <AddPostCard
           title={title}
           content={content}
@@ -102,10 +99,16 @@ function PostPage() {
                 <p>Updated at {post.updatedAt}</p>
               </CardFooter>
               <div className="flex items-center">
-                <Button variant={"ghost"} onClick={handleLikeClicked}>
+                <Button
+                  variant={"ghost"}
+                  onClick={() => {
+                    // alert(`${post.likeCount}`);
+                    setLikeCount(post.likeCount++);
+                  }}
+                >
                   👍
                 </Button>
-                <div >{post.likeCount}</div>
+                <div>{post.likeCount}</div>
               </div>
             </Card>
           );
