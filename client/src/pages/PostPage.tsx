@@ -79,8 +79,12 @@ function PostPage() {
     setTitle("");
   }
 
+  async function handleDeleteOnclick() {
+    alert("clicked");
+  }
+
   return (
-    <div className="flex flex-col p-4 gap-2">
+    <div className="flex flex-col p-6 gap-2">
       <SignedIn>
         <AddPostCard
           title={title}
@@ -95,7 +99,7 @@ function PostPage() {
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
           return (
-            <Card key={post.id}>
+            <Card key={post.id} className="pb-4">
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>By id {post.clientId}</CardDescription>
@@ -108,23 +112,32 @@ function PostPage() {
                 <p>Created at {post.createdAt}</p>
                 <p>Updated at {post.updatedAt}</p>
               </CardFooter>
-              <div className="flex items-center">
+              <div className="flex justify-between pl-2 pr-4">
+                <div className="flex items-center">
+                  <Button
+                    variant={"ghost"}
+                    onClick={() => {
+                      addLike(post.id);
+                      setLikeCount(post.likeCount++);
+                      // console.log(
+                      //   "post.id=> ",
+                      //   post.id,
+                      //   "likeCount=> ",
+                      //   likeCount
+                      // );
+                    }}
+                  >
+                    👍
+                  </Button>
+                  <div>{post.likeCount}</div>
+                </div>
                 <Button
-                  variant={"ghost"}
-                  onClick={() => {
-                    addLike(post.id);
-                    setLikeCount(post.likeCount++);
-                    // console.log(
-                    //   "post.id=> ",
-                    //   post.id,
-                    //   "likeCount=> ",
-                    //   likeCount
-                    // );
-                  }}
+                  variant={"destructive"}
+                  className="w-[100px]"
+                  onClick={handleDeleteOnclick}
                 >
-                  👍
+                  Delete
                 </Button>
-                <div>{post.likeCount}</div>
               </div>
             </Card>
           );
