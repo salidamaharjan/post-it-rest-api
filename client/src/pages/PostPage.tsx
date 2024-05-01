@@ -24,6 +24,7 @@ type Post = {
   updatedAt: string;
   likeCount: number;
 };
+
 function PostPage() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -49,6 +50,17 @@ function PostPage() {
       const result = await post("http://localhost:3000/api/posts", {
         title,
         content,
+      });
+      console.log("result", result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function addLike(id: number) {
+    try {
+      const result = await post("http://localhost:3000/api/likes", {
+        postId: id,
       });
       console.log("result", result);
     } catch (err) {
@@ -100,7 +112,14 @@ function PostPage() {
                 <Button
                   variant={"ghost"}
                   onClick={() => {
+                    addLike(post.id);
                     setLikeCount(post.likeCount++);
+                    // console.log(
+                    //   "post.id=> ",
+                    //   post.id,
+                    //   "likeCount=> ",
+                    //   likeCount
+                    // );
                   }}
                 >
                   👍

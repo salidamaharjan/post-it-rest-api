@@ -1,11 +1,14 @@
 import express, { Response, Request } from "express";
 const router = express.Router();
+import authMiddleware from "../auth";
 import Like from "../models/Like";
 
-router.post("/likes", async (req: Request, res: Response) => {
+router.post("/likes", authMiddleware, async (req: Request, res: Response) => {
   try {
+    const loggedInUser = (req as any).user;
+    const authorizedId = loggedInUser.id;
     await Like.create({
-      clientId: req.body.clientId,
+      clientId: authorizedId,
       postId: req.body.postId,
     });
     res.status(200).json({ message: "Liked the post!" });
