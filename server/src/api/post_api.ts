@@ -102,7 +102,7 @@ router.delete(
       // console.log("clientPost", clientPost);
       // console.log("idOfClientPost", idOfClientPost);
       if (authorizedId !== idOfClientPost) {
-        console.log("inside if", authorizedId, idOfClientPost);
+        // console.log("inside if", authorizedId, idOfClientPost);
         res.status(400).json({ message: "User not authorized" });
         return;
       }

@@ -31,3 +31,21 @@ export async function post(url: string, body: any) {
   const data = await response.json();
   return data;
 }
+export async function deletePost(url: string) {
+  const token = localStorage.getItem("token");
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      // "Content-Type": "application/json",
+    },
+  });
+  if (response.status === 401) {
+    console.log("error");
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    return;
+  }
+  const data = await response.json();
+  return data;
+}

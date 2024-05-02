@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { get } from "../lib/http";
-import { post } from "../lib/http";
+import { get, deletePost, post } from "../lib/http";
 
 import {
   Card,
@@ -59,28 +58,36 @@ function PostPage() {
 
   async function addLike(id: number) {
     try {
-      const result = await post("http://localhost:3000/api/likes", {
+      await post("http://localhost:3000/api/likes", {
         postId: id,
       });
-      console.log("result", result);
+      // console.log("result", result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  async function deleteAPost(id: number) {
+    try {
+      await deletePost(`http://localhost:3000/api/posts/${id}`);
     } catch (err) {
       console.log(err);
     }
   }
 
   async function handleAddOnclick() {
-    await addPost();
-    await fetchData();
-    toast({
-      variant: "success",
-      description: "Your Post Added!",
-    });
-    setContent("");
-    setTitle("");
-  }
-
-  async function handleDeleteOnclick() {
-    alert("clicked");
+    try {
+      await addPost();
+      await fetchData();
+      toast({
+        variant: "success",
+        description: "Your Post Added!",
+      });
+      setContent("");
+      setTitle("");
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -134,7 +141,11 @@ function PostPage() {
                 <Button
                   variant={"destructive"}
                   className="w-[100px]"
-                  onClick={handleDeleteOnclick}
+                  onClick={() => {
+                     deleteAPost(post.id);
+                    fetchData();
+                    console.log("post.id => ", post.id);
+                  }}
                 >
                   Delete
                 </Button>
