@@ -1,12 +1,21 @@
-import { jwtDecode } from "jwt-decode";
+import { UserContext } from "@/context/UserContext";
+import { useContext } from "react";
 
-type TokenPayload = {
-  id: number;
+type LoggedInUserProps = {
+  clientId: number;
+  children: React.ReactNode;
 };
-function loggedInUser(): number {
-  const token = localStorage.getItem("token");
-  const decoded: TokenPayload = jwtDecode(token!);
-  return decoded.id;
+export function LoggedInUser({ children, clientId }: LoggedInUserProps) {
+  const loggedInUserState = useContext(UserContext);
+  console.log(loggedInUserState?.loggedInUserId);
+  return (
+    <div>
+      {loggedInUserState?.loggedInUserId === undefined ||
+      loggedInUserState?.loggedInUserId !== clientId ? (
+        <></>
+      ) : (
+        children
+      )}
+    </div>
+  );
 }
-
-export default loggedInUser;

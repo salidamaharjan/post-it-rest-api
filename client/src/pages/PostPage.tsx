@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { get, doDelete, post } from "../lib/http";
-import loggedInUser from "@/components/reactComponent/LoggedInUser";
+import { LoggedInUser } from "@/components/reactComponent/LoggedInUser";
 import {
   Card,
   CardContent,
@@ -35,7 +35,6 @@ function PostPage() {
   }, []);
 
   const { toast } = useToast();
-  
 
   async function fetchData() {
     try {
@@ -134,21 +133,17 @@ function PostPage() {
                   </Button>
                   <div>{post.likeCount}</div>
                 </div>
-                <SignedIn>
-         { 
-              post.clientId === loggedInUser() ?
+                <LoggedInUser clientId={post.clientId}>
                   <Button
-                  variant={"destructive"}
-                  className="w-[100px]"
-                  onClick={() => {
-                    deleteAPost(post.id);
-                  }}
-                >
-                  Delete
-                </Button> :
-                  <></>
-                }
-                </SignedIn>
+                    variant={"destructive"}
+                    className="w-[100px]"
+                    onClick={() => {
+                      deleteAPost(post.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </LoggedInUser>
               </div>
             </Card>
           );
