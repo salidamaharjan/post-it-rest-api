@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { get, deletePost, post } from "../lib/http";
+import { get, doDelete, post } from "../lib/http";
 
 import {
   Card,
@@ -69,7 +69,8 @@ function PostPage() {
 
   async function deleteAPost(id: number) {
     try {
-      await deletePost(`http://localhost:3000/api/posts/${id}`);
+      await doDelete(`http://localhost:3000/api/posts/${id}`);
+      await fetchData();
     } catch (err) {
       console.log(err);
     }
@@ -126,29 +127,23 @@ function PostPage() {
                     onClick={() => {
                       addLike(post.id);
                       setLikeCount(post.likeCount++);
-                      // console.log(
-                      //   "post.id=> ",
-                      //   post.id,
-                      //   "likeCount=> ",
-                      //   likeCount
-                      // );
                     }}
                   >
                     👍
                   </Button>
                   <div>{post.likeCount}</div>
                 </div>
-                <Button
-                  variant={"destructive"}
-                  className="w-[100px]"
-                  onClick={() => {
-                     deleteAPost(post.id);
-                    fetchData();
-                    console.log("post.id => ", post.id);
-                  }}
-                >
-                  Delete
-                </Button>
+                <SignedIn>
+                  <Button
+                    variant={"destructive"}
+                    className="w-[100px]"
+                    onClick={() => {
+                      deleteAPost(post.id);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </SignedIn>
               </div>
             </Card>
           );

@@ -31,7 +31,7 @@ export async function post(url: string, body: any) {
   const data = await response.json();
   return data;
 }
-export async function deletePost(url: string) {
+export async function doDelete(url: string) {
   const token = localStorage.getItem("token");
   const response = await fetch(url, {
     method: "DELETE",
