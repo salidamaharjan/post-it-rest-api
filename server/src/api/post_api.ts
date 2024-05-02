@@ -12,6 +12,7 @@ router.get("/posts", async (req: Request, res: Response) => {
         "id",
         "title",
         "content",
+        "clientId",
         "createdAt",
         "updatedAt",
         [sequelize.fn("COUNT", sequelize.col("likes")), "likeCount"],
