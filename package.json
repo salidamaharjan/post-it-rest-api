@@ -4,12 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently  \"cd server && pnpm dev\"  \"cd client && pnpm dev\""
+    "dev": "pnpm kill && concurrently  \"cd server && pnpm dev\"  \"cd client && pnpm dev\"",
+    "kill": "concurrently \"kill-port 3000\" \"kill-port 5173\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
   }
 }

@@ -7,7 +7,7 @@ type LoggedInUserProps = {
 };
 export function LoggedInUser({ children, clientId }: LoggedInUserProps) {
   const loggedInUserState = useContext(UserContext);
-  console.log(loggedInUserState?.loggedInUserId);
+  // console.log(loggedInUserState?.loggedInUserId);
   return (
     <div>
       {loggedInUserState?.loggedInUserId === undefined ||
