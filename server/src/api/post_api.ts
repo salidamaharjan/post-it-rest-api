@@ -9,6 +9,7 @@ router.get("/posts", async (req: Request, res: Response) => {
     const posts = await Post.findAll({
       include: [{ model: Like }, { model: Client }],
     });
+    // console.log("Posts", posts.map((post)=>{return post.toJSON();}));
 
     const refinedPost = posts.map((post: any) => {
       return {
@@ -16,12 +17,12 @@ router.get("/posts", async (req: Request, res: Response) => {
         title: post.title,
         content: post.content,
         clientId: post.clientId,
-        username: post.client.username,
+        username: post.Client.username,
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
-        likeCount: post.likes.length,
+        likeCount: post.Likes.length,
         hasCurrentUserLiked: (req as any).user?.id
-          ? post.likes.some((like: any) => {
+          ? post.Likes.some((like: any) => {
               return like.clientId === (req as any).user.id;
             })
           : false,

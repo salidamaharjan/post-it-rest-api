@@ -39,7 +39,7 @@ Like.init(
   },
   {
     sequelize,
-    modelName: "like",
+    // modelName: "like",
     underscored: true,
     timestamps: true,
     freezeTableName: true,

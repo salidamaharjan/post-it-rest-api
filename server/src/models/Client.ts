@@ -34,7 +34,7 @@ Client.init(
   },
   {
     sequelize,
-    modelName: "client",
+    // modelName: "client",
     underscored: true,
     timestamps: true,
     freezeTableName: true,
