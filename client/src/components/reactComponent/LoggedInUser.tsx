@@ -5,6 +5,7 @@ type LoggedInUserProps = {
   clientId: number;
   children: React.ReactNode;
 };
+
 export function LoggedInUser({ children, clientId }: LoggedInUserProps) {
   const loggedInUserState = useContext(UserContext);
   // console.log(loggedInUserState?.loggedInUserId);

@@ -61,7 +61,14 @@ function PostPage() {
       await post("http://localhost:3000/api/likes", {
         postId: id,
       });
-      // console.log("result", result);
+      console.log("id", id);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function deleteLike(id: number) {
+    try {
+      await doDelete(`http://localhost:3000/api/likes/${id}`);
     } catch (err) {
       console.log(err);
     }

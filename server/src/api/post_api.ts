@@ -3,25 +3,29 @@ const router = express.Router();
 import Post from "../models/Post";
 import authMiddleware from "../auth";
 import { Like } from "../models";
-import { sequelize } from "../connection";
 
 router.get("/posts", async (req: Request, res: Response) => {
   try {
     const posts = await Post.findAll({
-      attributes: [
-        "id",
-        "title",
-        "content",
-        "clientId",
-        "createdAt",
-        "updatedAt",
-        [sequelize.fn("COUNT", sequelize.col("likes")), "likeCount"],
-      ],
-      include: { model: Like, attributes: [] },
-      group: ["post.id", "post.title", "post.content"],
+      include: { model: Like },
     });
-    // console.log(posts);
-    res.status(200).json(posts);
+    const refinedPost = posts.map((post: any) => {
+      return {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        clientId: post.clientId,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        likeCount: post.likes.length,
+        hasCurrentUserLiked: (req as any).user?.id
+          ? post.likes.some((like: any) => {
+              return like.clientId === (req as any).user.id;
+            })
+          : false,
+      };
+    });
+    res.status(200).json(refinedPost);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err });
