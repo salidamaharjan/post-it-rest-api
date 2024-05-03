@@ -12,6 +12,7 @@ import {
 import { SignedIn } from "@/components/reactComponent/SignedIn";
 import { AddPostCard } from "@/components/reactComponent/AppPostCard";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
 
 type Post = {
   id: number;
@@ -79,77 +80,89 @@ function PostPage() {
       <div className="flex flex-col gap-4">
         {allPosts.map((post) => {
           return (
-            <Card key={post.id} className="pb-4">
-              <CardHeader>
+            <Card key={post.id}>
+              <CardHeader className="pb-2">
                 <CardTitle>{post.title}</CardTitle>
                 <CardDescription>By id {post.username}</CardDescription>
               </CardHeader>
-              <CardContent>
+              <CardContent className="pb-2">
                 <div className="text-green-700 text-lg font-bold">Content</div>
                 <p className="whitespace-pre-wrap">{post.content}</p>
               </CardContent>
-              <CardFooter className="flex justify-between text-center">
-                <p>Created at {post.createdAt}</p>
-                <p>Updated at {post.updatedAt}</p>
-              </CardFooter>
-              <div className="flex justify-between pl-2 pr-4">
-                <div className="flex items-center">
-                  <div className="flex gap-2 items-center">
-                    {post.hasCurrentUserLiked === true ? (
-                      <Button
-                        variant={"ghost"}
-                        className="bg-green-500"
-                        onClick={async () => {
-                          if (post.hasCurrentUserLiked === true) {
-                            await deleteLike(post.id);
-                            setLikeCount(post.likeCount--);
-                            await fetchData();
-                          } else {
-                            await addLike(post.id);
-                            setLikeCount(post.likeCount++);
-                            await fetchData();
-                          }
-                          post.hasCurrentUserLiked = false;
-                        }}
-                      >
-                        👍
-                      </Button>
-                    ) : (
-                      <Button
-                        variant={"ghost"}
-                        onClick={async () => {
-                          if (post.hasCurrentUserLiked === true) {
-                            await deleteLike(post.id);
-                            setLikeCount(post.likeCount--);
-                            await fetchData();
-                          } else {
-                            await addLike(post.id);
-                            setLikeCount(post.likeCount++);
-                            await fetchData();
-                          }
-                          post.hasCurrentUserLiked = false;
-                        }}
-                      >
-                        👍
-                      </Button>
-                    )}
-                    <div>{post.likeCount}</div>
-                  </div>
+              <CardFooter className="flex flex-col justify-start gap-2 items-stretch">
+                <div className="flex justify-between">
+                  <span>
+                    <span className="text-blue-400 font-bold">
+                      Created at:{" "}
+                    </span>
+                    {dayjs(post.createdAt).format("MM/DD/YYYY HH:mm A")}
+                  </span>
+                  <span>
+                    <span className="text-blue-400 font-bold">
+                      Updated at:{" "}
+                    </span>
+                    {dayjs(post.updatedAt).format("MM/DD/YYYY HH:mm A")}
+                  </span>{" "}
                 </div>
-                <LoggedInUser clientId={post.clientId}>
-                  <div className="flex gap-2">
-                    <Button
-                      variant={"destructive"}
-                      className="w-[100px]"
-                      onClick={() => {
-                        deleteAPost(post.id);
-                      }}
-                    >
-                      Delete
-                    </Button>
+                <div className="flex justify-between">
+                  <div className="flex items-center">
+                    <div className="flex gap-2 items-center">
+                      {post.hasCurrentUserLiked === true ? (
+                        <Button
+                          variant={"ghost"}
+                          className="bg-green-500"
+                          onClick={async () => {
+                            if (post.hasCurrentUserLiked === true) {
+                              await deleteLike(post.id);
+                              setLikeCount(post.likeCount--);
+                              await fetchData();
+                            } else {
+                              await addLike(post.id);
+                              setLikeCount(post.likeCount++);
+                              await fetchData();
+                            }
+                            post.hasCurrentUserLiked = false;
+                          }}
+                        >
+                          👍
+                        </Button>
+                      ) : (
+                        <Button
+                          variant={"ghost"}
+                          onClick={async () => {
+                            if (post.hasCurrentUserLiked === true) {
+                              await deleteLike(post.id);
+                              setLikeCount(post.likeCount--);
+                              await fetchData();
+                            } else {
+                              await addLike(post.id);
+                              setLikeCount(post.likeCount++);
+                              await fetchData();
+                            }
+                            post.hasCurrentUserLiked = false;
+                          }}
+                        >
+                          👍
+                        </Button>
+                      )}
+                      <div>{post.likeCount}</div>
+                    </div>
                   </div>
-                </LoggedInUser>
-              </div>
+                  <LoggedInUser clientId={post.clientId}>
+                    <div className="flex gap-2">
+                      <Button
+                        variant={"destructive"}
+                        className="w-[100px]"
+                        onClick={() => {
+                          deleteAPost(post.id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  </LoggedInUser>
+                </div>
+              </CardFooter>
             </Card>
           );
         })}
