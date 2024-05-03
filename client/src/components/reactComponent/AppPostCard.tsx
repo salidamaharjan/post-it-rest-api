@@ -6,6 +6,15 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { post } from "../../lib/http";
 import { useToast } from "@/components/ui/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog"
+
 
 type AddPostCardProps = {
   onAdd: () => void;
