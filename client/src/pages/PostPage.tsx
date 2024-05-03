@@ -115,6 +115,8 @@ function PostPage() {
                   <div>{post.likeCount}</div>
                 </div>
                 <LoggedInUser clientId={post.clientId}>
+                  <div className="flex gap-2">
+                  <Button variant={"secondary"}>Edit</Button>
                   <Button
                     variant={"destructive"}
                     className="w-[100px]"
@@ -124,6 +126,7 @@ function PostPage() {
                   >
                     Delete
                   </Button>
+                  </div>
                 </LoggedInUser>
               </div>
             </Card>
