@@ -136,11 +136,11 @@ function PostPage() {
                       if (post.hasCurrentUserLiked === true) {
                         await deleteLike(post.id);
                         setLikeCount(post.likeCount--);
-                        fetchData();
+                        await fetchData();
                       } else {
                         await addLike(post.id);
                         setLikeCount(post.likeCount++);
-                        fetchData();
+                        await fetchData();
                       }
                       post.hasCurrentUserLiked = false;
                     }}
