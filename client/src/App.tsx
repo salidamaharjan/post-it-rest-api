@@ -15,6 +15,7 @@ function App() {
     userLoggedInState?.setIsLoggedIn(false);
     localStorage.removeItem("token");
     navigate("/login");
+    window.location.reload();
   }
   return (
     <div>

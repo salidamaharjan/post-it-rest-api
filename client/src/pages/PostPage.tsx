@@ -29,6 +29,7 @@ function PostPage() {
   const [likeCount, setLikeCount] = useState(1);
 
   useEffect(() => {
+    console.log("dataFetch");
     fetchData();
   }, []);
 
@@ -104,6 +105,7 @@ function PostPage() {
                         await addLike(post.id);
                         setLikeCount(post.likeCount++);
                         await fetchData();
+                        // window.location.reload();
                       }
                       post.hasCurrentUserLiked = false;
                     }}

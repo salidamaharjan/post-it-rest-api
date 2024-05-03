@@ -24,6 +24,7 @@ function LoginPage() {
       userLoggedInState?.setIsLoggedIn(true);
       localStorage.setItem("token", token);
       navigate("/");
+      window.location.reload();
     }
     setUsername("");
     setPassword("");
