@@ -2,19 +2,21 @@ import express, { Response, Request } from "express";
 const router = express.Router();
 import Post from "../models/Post";
 import authMiddleware from "../auth";
-import { Like } from "../models";
+import { Like, Client } from "../models";
 
 router.get("/posts", async (req: Request, res: Response) => {
   try {
     const posts = await Post.findAll({
-      include: { model: Like },
+      include: [{ model: Like }, { model: Client }],
     });
+
     const refinedPost = posts.map((post: any) => {
       return {
         id: post.id,
         title: post.title,
         content: post.content,
         clientId: post.clientId,
+        username: post.client.username,
         createdAt: post.createdAt,
         updatedAt: post.updatedAt,
         likeCount: post.likes.length,

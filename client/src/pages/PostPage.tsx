@@ -18,6 +18,7 @@ type Post = {
   title: string;
   content: string;
   clientId: number;
+  username: string;
   createdAt: string;
   updatedAt: string;
   likeCount: number;
@@ -29,7 +30,6 @@ function PostPage() {
   const [likeCount, setLikeCount] = useState(1);
 
   useEffect(() => {
-    console.log("dataFetch");
     fetchData();
   }, []);
 
@@ -82,7 +82,7 @@ function PostPage() {
             <Card key={post.id} className="pb-4">
               <CardHeader>
                 <CardTitle>{post.title}</CardTitle>
-                <CardDescription>By id {post.clientId}</CardDescription>
+                <CardDescription>By id {post.username}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-green-700 text-lg font-bold">Content</div>
