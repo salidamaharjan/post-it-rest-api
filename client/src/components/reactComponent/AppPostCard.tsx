@@ -65,7 +65,7 @@ export function AddPostCard({ onAdd }: AddPostCardProps) {
         <DialogHeader>
           <DialogTitle>Add a Post</DialogTitle>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
+        <div className="grid gap-4 py-4 ">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Title
@@ -87,7 +87,7 @@ export function AddPostCard({ onAdd }: AddPostCardProps) {
             <Textarea
               id="username"
               placeholder="Your content"
-              className="col-span-3"
+              className="col-span-3 "
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);

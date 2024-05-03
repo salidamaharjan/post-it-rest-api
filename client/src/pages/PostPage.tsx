@@ -86,7 +86,7 @@ function PostPage() {
               </CardHeader>
               <CardContent>
                 <div className="text-green-700 text-lg font-bold">Content</div>
-                <p>{post.content}</p>
+                <p className="whitespace-pre-wrap">{post.content}</p>
               </CardContent>
               <CardFooter className="flex justify-between text-center">
                 <p>Created at {post.createdAt}</p>
