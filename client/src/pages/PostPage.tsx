@@ -71,7 +71,7 @@ function PostPage() {
   }
 
   return (
-    <div className="flex flex-col p-6 gap-2">
+    <div className="flex flex-col m-auto p-6 gap-2 max-w-[1200px]">
       <SignedIn>
         <AddPostCard onAdd={fetchData} />
       </SignedIn>
@@ -92,17 +92,9 @@ function PostPage() {
               <CardFooter className="flex flex-col justify-start gap-2 items-stretch">
                 <div className="flex justify-between">
                   <span>
-                    <span className="text-blue-400 font-bold">
-                      Created at:{" "}
-                    </span>
+                    <span className="text-blue-400 font-bold">Posted at: </span>
                     {dayjs(post.createdAt).format("MM/DD/YYYY HH:mm A")}
                   </span>
-                  <span>
-                    <span className="text-blue-400 font-bold">
-                      Updated at:{" "}
-                    </span>
-                    {dayjs(post.updatedAt).format("MM/DD/YYYY HH:mm A")}
-                  </span>{" "}
                 </div>
                 <div className="flex justify-between">
                   <div className="flex items-center">
