@@ -22,6 +22,7 @@ type Post = {
   createdAt: string;
   updatedAt: string;
   likeCount: number;
+  hasCurrentUserLiked: boolean;
 };
 
 function PostPage() {
@@ -131,9 +132,17 @@ function PostPage() {
                 <div className="flex items-center">
                   <Button
                     variant={"ghost"}
-                    onClick={() => {
-                      addLike(post.id);
-                      setLikeCount(post.likeCount++);
+                    onClick={async () => {
+                      if (post.hasCurrentUserLiked === true) {
+                        await deleteLike(post.id);
+                        setLikeCount(post.likeCount--);
+                        fetchData();
+                      } else {
+                        await addLike(post.id);
+                        setLikeCount(post.likeCount++);
+                        fetchData();
+                      }
+                      post.hasCurrentUserLiked = false;
                     }}
                   >
                     👍
