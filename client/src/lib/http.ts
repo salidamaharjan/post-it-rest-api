@@ -49,3 +49,24 @@ export async function doDelete(url: string) {
   const data = await response.json();
   return data;
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function edit(url: string, body: any) {
+  const token = localStorage.getItem("token");
+  const response = await fetch(url, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+  if (response.status === 401) {
+    console.log("error");
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+    return;
+  }
+  const data = await response.json();
+  return data;
+}
