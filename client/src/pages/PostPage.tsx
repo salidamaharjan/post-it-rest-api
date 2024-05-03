@@ -9,7 +9,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useToast } from "@/components/ui/use-toast";
 import { SignedIn } from "@/components/reactComponent/SignedIn";
 import { AddPostCard } from "@/components/reactComponent/AppPostCard";
 import { Button } from "@/components/ui/button";
@@ -26,8 +25,6 @@ type Post = {
 };
 
 function PostPage() {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [likeCount, setLikeCount] = useState(1);
 
@@ -35,23 +32,10 @@ function PostPage() {
     fetchData();
   }, []);
 
-  const { toast } = useToast();
-
   async function fetchData() {
     try {
       const result = await get("http://localhost:3000/api/posts");
       setAllPosts(result);
-    } catch (err) {
-      console.log(err);
-    }
-  }
-  async function addPost() {
-    try {
-      const result = await post("http://localhost:3000/api/posts", {
-        title,
-        content,
-      });
-      console.log("result", result);
     } catch (err) {
       console.log(err);
     }
@@ -84,31 +68,10 @@ function PostPage() {
     }
   }
 
-  async function handleAddOnclick() {
-    try {
-      await addPost();
-      await fetchData();
-      toast({
-        variant: "success",
-        description: "Your Post Added!",
-      });
-      setContent("");
-      setTitle("");
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   return (
     <div className="flex flex-col p-6 gap-2">
       <SignedIn>
-        <AddPostCard
-          title={title}
-          content={content}
-          setContent={setContent}
-          setTitle={setTitle}
-          onClick={handleAddOnclick}
-        />
+        <AddPostCard onAdd={fetchData} />
       </SignedIn>
 
       <div className="text-green-600 text-2xl text-center font-bold">Posts</div>

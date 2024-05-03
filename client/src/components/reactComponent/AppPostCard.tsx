@@ -3,14 +3,44 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-type AddPostCard = {
-  title: string;
-  content: string;
-  setTitle: React.Dispatch<React.SetStateAction<string>>;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
+import { useState } from "react";
+import { post } from "../../lib/http";
+import { useToast } from "@/components/ui/use-toast";
+
+type AddPostCardProps = {
+  onAdd: () => void;
 };
-export function AddPostCard({title, content, setTitle, setContent, onClick}: AddPostCard) {
+
+export function AddPostCard({ onAdd }: AddPostCardProps) {
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const { toast } = useToast();
+
+  async function addPost() {
+    try {
+      const result = await post("http://localhost:3000/api/posts", {
+        title,
+        content,
+      });
+      console.log("result", result);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  async function handleAddOnclick() {
+    try {
+      await addPost();
+      onAdd();
+      toast({
+        variant: "success",
+        description: "Your Post Added!",
+      });
+      setContent("");
+      setTitle("");
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <Card className="flex flex-col p-4 gap-2">
       <CardTitle>Add a Post</CardTitle>
@@ -35,7 +65,7 @@ export function AddPostCard({title, content, setTitle, setContent, onClick}: Add
         }}
       ></Textarea>
 
-      <Button className="bg-green-600 w-[100px]" onClick={onClick}>
+      <Button className="bg-green-600 w-[100px]" onClick={handleAddOnclick}>
         Add
       </Button>
     </Card>
