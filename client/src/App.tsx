@@ -34,6 +34,9 @@ function App() {
               <TabsTrigger value="login">
                 <Link to="/login">Login</Link>
               </TabsTrigger>
+              <TabsTrigger value="signup">
+                <Link to="/signup">Signup</Link>
+              </TabsTrigger>
             </SignedOut>
           </TabsList>
         </div>

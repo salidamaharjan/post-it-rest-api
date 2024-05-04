@@ -4,6 +4,7 @@ import LoginPage from "./pages/LoginPage";
 import App from "./App";
 import PostPage from "./pages/PostPage";
 import { UserContextProvider } from "./context/UserContext";
+import SignupPage from "./pages/SignupPage";
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
         path: "/login",
         element: <LoginPage />,
       },
+      {
+        path: "/signup",
+        element: <SignupPage/>
+      }
     ],
   },
 ]);

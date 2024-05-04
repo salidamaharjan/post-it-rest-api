@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "pnpm kill && concurrently  \"cd server && pnpm dev\"  \"cd client && pnpm dev\"",
-    "kill": "concurrently \"kill-port 3000\" \"kill-port 5173\""
+    "kill": "concurrently \"kill-port 3000\" \"kill-port 5173\"",
+    "seed": "cd server && pnpm seed"
   },
   "keywords": [],
   "author": "",
