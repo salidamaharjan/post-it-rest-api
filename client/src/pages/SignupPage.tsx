@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import { post } from "../lib/http";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "@/context/UserContext";
 
 function SignupPage() {
@@ -63,7 +63,10 @@ function SignupPage() {
             Create account
           </Button>
         </CardContent>
-      </Card>
+        <div className="text-center">
+        Already have an account, <Link to="/login" className="underline-offset-2 underline text-blue-300">Login</Link>
+      </div>
+      </Card>   
     </div>
   );
 }
