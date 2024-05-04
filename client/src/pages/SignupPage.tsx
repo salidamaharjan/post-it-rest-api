@@ -15,7 +15,7 @@ function SignupPage() {
 
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
-    const data = await post("http://localhost:3000/api/login", {
+    const data = await post("http://localhost:3000/api/signup", {
       username,
       password,
     });
@@ -64,9 +64,15 @@ function SignupPage() {
           </Button>
         </CardContent>
         <div className="text-center">
-        Already have an account, <Link to="/login" className="underline-offset-2 underline text-blue-300">Login</Link>
-      </div>
-      </Card>   
+          Already have an account,{" "}
+          <Link
+            to={"/login"}
+            className="underline-offset-2 underline text-blue-300"
+          >
+            Login
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 }

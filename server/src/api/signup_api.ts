@@ -23,14 +23,14 @@ router.post("/signup", async (req: Request, res: Response) => {
         username,
         password: await bcrypt.hash(password, 15),
       });
-      console.log("newUser", newUser);
+      // console.log("newUser", newUser);
       const token = jwt.sign({ id: newUser!.id }, process.env.JWT_SECRET!, {
         expiresIn: process.env.JWT_REFRESH_EXPIRATION,
       });
 
       res.status(200).send({
         id: newUser!.id,
-        username: user!.username,
+        username: newUser!.username,
         accessToken: token,
       });
     }

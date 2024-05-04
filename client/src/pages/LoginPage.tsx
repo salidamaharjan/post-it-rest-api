@@ -64,7 +64,7 @@ function LoginPage() {
           </Button>
         </CardContent>
         <div className="text-center">
-        Don't have an account, <Link to="/signup" className="underline-offset-2 underline text-blue-300">Sign Up</Link>
+        Don't have an account, <Link to={"/signup"} className="underline-offset-2 underline text-blue-400">Sign Up</Link>
       </div>
       </Card>   
     </div>
