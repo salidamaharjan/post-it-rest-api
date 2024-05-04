@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import { post } from "../lib/http";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { UserContext } from "@/context/UserContext";
 
 function SignupPage() {
@@ -12,7 +12,6 @@ function SignupPage() {
   const [password, setPassword] = useState("");
   const userLoggedInState = useContext(UserContext);
   const navigate = useNavigate();
-
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
     const data = await post("http://localhost:3000/api/signup", {
@@ -66,7 +65,7 @@ function SignupPage() {
         <div className="text-center">
           Already have an account,{" "}
           <Link
-            to={"/login"}
+            to={"/login"} 
             className="underline-offset-2 underline text-blue-300"
           >
             Login

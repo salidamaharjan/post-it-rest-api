@@ -26,11 +26,11 @@ export function AddPostCard({ onAdd }: AddPostCardProps) {
 
   async function addPost() {
     try {
-      const result = await post("http://localhost:3000/api/posts", {
+      await post("http://localhost:3000/api/posts", {
         title,
         content,
       });
-      console.log("result", result);
+      // console.log("result", result);
     } catch (err) {
       console.log(err);
     }

@@ -48,7 +48,7 @@ function PostPage() {
       await post("http://localhost:3000/api/likes", {
         postId: id,
       });
-      console.log("id", id);
+      // console.log("id", id);
     } catch (err) {
       console.log(err);
     }

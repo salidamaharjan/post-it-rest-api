@@ -12,7 +12,6 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const userLoggedInState = useContext(UserContext);
   const navigate = useNavigate();
-
   async function handleOnClick() {
     // alert(`username: ${username} password: ${password}`);
     const data = await post("http://localhost:3000/api/login", {
@@ -64,9 +63,15 @@ function LoginPage() {
           </Button>
         </CardContent>
         <div className="text-center">
-        Don't have an account, <Link to={"/signup"} className="underline-offset-2 underline text-blue-400">Sign Up</Link>
-      </div>
-      </Card>   
+          Don't have an account,{" "}
+          <Link
+            to={"/signup"}
+            className="underline-offset-2 underline text-blue-400"
+          >
+            Sign Up
+          </Link>
+        </div>
+      </Card>
     </div>
   );
 }
